@@ -9,12 +9,12 @@ using namespace std;
 using namespace cv;
 
 //Just trying what diff functions do
-void blurEdgeHighlight(Mat img, int Strength) {
+Mat blurEdgeHighlight(Mat img, int Strength) {
 	Mat final_img;
 	Mat kernel = getStructuringElement(MORPH_RECT, Size(7, 7));
 	GaussianBlur(img, final_img, Size(1, 1), 3, 0);
 	dilate(final_img, final_img, kernel);
-	imshow("PortraitMode", final_img);
+	return final_img;
 }
 
 
@@ -29,7 +29,7 @@ int main() {
 	//dilate(img_canny, img_dilated, kernel);
 
 	//Test portrait
-	blurEdgeHighlight(img_resized, 5);
+	imshow("Image from function", blurEdgeHighlight(img_resized, 5));
 	//Show the results
 	/*imshow("Test", img_blur);
 	imshow("Canny", img_canny);
