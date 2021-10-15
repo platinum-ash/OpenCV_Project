@@ -9,7 +9,8 @@
 *.user
 *.userosscache
 *.sln.docstates
-*.Chapter3
+*Chapter3
+*Chapter4
 # Ignore VS Code files since I am working cross-platform, don't want things to break on windows
 .vscode/
 # User-specific files (MonoDevelop/Xamarin Studio)
