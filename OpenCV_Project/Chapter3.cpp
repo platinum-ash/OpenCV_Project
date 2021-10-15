@@ -39,6 +39,10 @@ int main() {
 	//Test dilation
 	imshow("Dilated image", img_dilated);
 
+	//Try creating a blank image
+	Mat img_create(600, 400, CV_8UC3, Scalar(200, 220, 100));
+	imshow("Created image", img_create);//Show created image
+
 	
 	waitKey(0);
 	return 0;

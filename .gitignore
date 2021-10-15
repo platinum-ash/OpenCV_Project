@@ -10,6 +10,8 @@
 *.userosscache
 *.sln.docstates
 
+# Ignore VS Code files since I am working cross-platform, don't want things to break on windows
+vscode/
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 
