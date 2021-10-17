@@ -40,5 +40,5 @@ int main() {
 	imshow("Dilated image", img_dilated);
 
 	waitKey(0);
-	return 0;
+	return 0; 
 }
