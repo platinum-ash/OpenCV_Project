@@ -25,6 +25,12 @@ int main() {
 
 	transformed = getPerspectiveTransform(transform_src, transform_dst);
 	warpPerspective(img, img_out, transformed, Point(width, height));
+
+	//Highlight points to better show where the image for change of perspective is being extracted from
+	for (int i = 0; i < 4; i++) {
+		circle(img, transform_src[i], 8, Scalar(0, 70 ,255), FILLED);
+	}
+
 	imshow("Changed perspective", img_out);//Show extracted and changed perspective image of the single card
 	imshow("Original image", img);
 	waitKey(0);
