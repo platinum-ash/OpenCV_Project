@@ -53,10 +53,8 @@ void getContours(Mat img_dil, Mat img)
 Mat preProcessor(Mat img) 
 {
 	Mat img_blur, img_canny, img_dilated, kernel, img_crop, img_mono;
-
-	//Test basic functions
-	cvtColor(img, img_mono, COLOR_BGR2GRAY);
-	GaussianBlur(img, img_blur, Size(7, 7), 5, 0);
+	cvtColor(img, img_mono, COLOR_BGR2GRAY);//Convert color to gray scale
+	GaussianBlur(img, img_blur, Size(7, 7), 5, 0);//Add blur
 	Canny(img_blur, img_canny, 25, 80);
 	kernel = getStructuringElement(MORPH_RECT, Size(3, 3));
 	dilate(img_canny, img_dilated, kernel);
