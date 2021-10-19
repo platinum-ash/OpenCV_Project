@@ -84,6 +84,12 @@ int main() {
 	getline(cin, userInput);
 	//Read image using user provided path
 	img = imread(userInput);
+	//Print an error and exit if image cannot be read
+	if (img.empty())
+	{
+		cout << "Invalid path or image file type. Please try again!" << endl;
+		return EXIT_FAILURE;
+	}
 	//Check if image needs to be shrinked
 	checkSize(img);
 	//Prepare image for contour detection
