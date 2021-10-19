@@ -17,7 +17,8 @@ using namespace cv;
 *	Arguments: takes Matrix of dilated image and the original image
 *	Returns: void, no return
 ****/
-void getContours(Mat img_dil, Mat img){
+void getContours(Mat img_dil, Mat img)
+{
 	//Set up according to documentation
 	vector<vector<Point>> contours;
 	vector<Vec4i> hierarchy;
@@ -25,10 +26,12 @@ void getContours(Mat img_dil, Mat img){
 	//Define area variable to filter out noise contours by specifying minimum area
 	double area = 0;
 	//Draw contours one by one while filtering out noise
-	for (int i = 0; i < contours.size(); i++) {
+	for (int i = 0; i < contours.size(); i++) 
+	{
 		area = contourArea(contours[i]);
 		//Filter out any object with area <= 2500
-		if (area > 2500) {
+		if (area > 2500) 
+		{
 			drawContours(img, contours, i, Scalar(155, 120, 255), 6);
 		}
 	}
@@ -47,7 +50,8 @@ void getContours(Mat img_dil, Mat img){
 *	Arguments: Mat type argument of original image
 *	Returns: dilated image of type Mat ready for contour detection
 ****/
-Mat preProcessor(Mat img) {
+Mat preProcessor(Mat img) 
+{
 	Mat img_blur, img_canny, img_dilated, kernel, img_crop, img_mono;
 
 	//Test basic functions
@@ -66,16 +70,19 @@ Mat preProcessor(Mat img) {
 *	Returns: void
 *****/
 //
-void checkSize(Mat &img) {
+void checkSize(Mat &img) 
+{
 	Size img_size = img.size();
 	int width = img_size.width;
 	int height = img_size.height;
-	if (height > 1000 || width > 1000) {
+	if (height > 1000 || width > 1000) 
+	{
 		resize(img, img, Size(800, 600));
 	}
 }
 
-int main() {
+int main() 
+{
 	Mat img;
 	//For now use console input for the image file path.
 	//TODO : ACCEPTH IMAGE PATH AS COMMAND LINE INPUT WHEN THE PROGRAM STARTS
