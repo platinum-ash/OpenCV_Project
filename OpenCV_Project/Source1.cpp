@@ -10,23 +10,30 @@ using namespace std;
 using namespace cv;
 
 
+
+/****
+*	getContours;
+*	Function to findand draw detected contours on the original image
+*	Arguments: takes Matrix of dilated image and the original image
+*	Returns: void, no return
+****/
 void getContours(Mat img_dil, Mat img){
+	//Set up according to documentation
 	vector<vector<Point>> contours;
 	vector<Vec4i> hierarchy;
 	findContours(img_dil, contours, hierarchy, RETR_EXTERNAL, CHAIN_APPROX_SIMPLE);
-	//drawContours(img, contours, -1, Scalar(0, 0, 0), 8);
+	//Define area variable to filter out noise contours by specifying minimum area
 	double area = 0;
+	//Draw contours one by one while filtering out noise
 	for (int i = 0; i < contours.size(); i++) {
 		area = contourArea(contours[i]);
-
+		//Filter out any object with area <= 2500
 		if (area > 2500) {
 			drawContours(img, contours, i, Scalar(155, 120, 255), 6);
 		}
-		//cout << area << endl;
 	}
 
-
-
+	//Show the result
 	imshow("Dilated image passed to the function", img_dil);
 	imshow("Contoured image", img);
 	waitKey(0);
@@ -34,7 +41,12 @@ void getContours(Mat img_dil, Mat img){
 }
 
 
-
+/****
+*	preProcessor;
+*	Prepares an image for contour detection.
+*	Arguments: Mat type argument of original image
+*	Returns: dilated image of type Mat ready for contour detection
+****/
 Mat preProcessor(Mat img) {
 	Mat img_blur, img_canny, img_dilated, kernel, img_crop, img_mono;
 
@@ -47,8 +59,13 @@ Mat preProcessor(Mat img) {
 	return img_dilated;
 }
 
-
-//Check size of image and shrink it if necessary
+/****
+*	checkSize;
+*	Check size of image and shrink it if necessary
+*	Arguments: Image of type Mat passed by reference
+*	Returns: void
+*****/
+//
 void checkSize(Mat &img) {
 	Size img_size = img.size();
 	int width = img_size.width;
@@ -65,18 +82,14 @@ int main() {
 	string userInput;
 	cout << "Please input path of the image: ";
 	getline(cin, userInput);
-
-	cout << "The string that was read was :  " << userInput << endl;
-	//Check if image needs to be shrinked
-	//string path = "Images//img6.png";
+	//Read image using user provided path
 	img = imread(userInput);
+	//Check if image needs to be shrinked
 	checkSize(img);
-
+	//Prepare image for contour detection
 	Mat img_contour = preProcessor(img);
+	//Add contours and show the result
 	getContours(img_contour, img);
 
-	/*
-	imshow("From the function", img_contour);
-	waitKey(0);*/
 	return EXIT_SUCCESS;
 }
