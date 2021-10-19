@@ -20,7 +20,7 @@ void getContours(Mat img_dil, Mat img){
 		area = contourArea(contours[i]);
 
 		if (area > 2500) {
-			drawContours(img, contours, i, Scalar(0, 0, 0), 8);
+			drawContours(img, contours, i, Scalar(155, 120, 255), 6);
 		}
 		//cout << area << endl;
 	}
