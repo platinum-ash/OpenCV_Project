@@ -5,8 +5,8 @@ main.cpp file is to be run. image_processing cpp and header files should be kept
 be updated.
 
 Present functions for image processing:
-  1: Finding HSV color code of a particular object in image for further processing. Using realtime trackbars.
-  2: Finding and drawing detected contours
+  \n1: Finding HSV color code of a particular object in image for further processing. Using realtime trackbars.
+  \n2: Finding and drawing detected contours
   
 
 New functions and features can easily be added to the project.
