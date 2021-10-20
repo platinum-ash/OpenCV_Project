@@ -12,6 +12,7 @@ using namespace cv;
 using std::cout;
 using std::getline;
 using std::string;
+using std::cin;
 
 
 /****
@@ -46,7 +47,7 @@ int main()
 	//Print an error and exit if image cannot be read
 	if (img.empty())
 	{
-		cout << "Invalid path or image file type. Please try again!" << endl;
+		cout << "Invalid path or image file type. Please try again!" << std::endl;
 		return EXIT_FAILURE;
 	}
 	//Check if image needs to be shrinked
