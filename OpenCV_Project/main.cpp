@@ -60,6 +60,7 @@ int main()
 	cin >> userChoice;
 
 	Mat img_contour;
+	vector<vector<Point>> contours;
 	switch (userChoice)
 	{
 		case 1:
@@ -69,8 +70,8 @@ int main()
 		case 2:
 			//Prepare image for contour detection
 			img_contour = preProcessor(img);
-			//Add contours and show the result
-			getContours(img_contour, img);
+			contours = findContours(img, img_contour);
+			drawContours(img, contours);
 			break;
 		case 3:
 			//Prepare image for shape detection

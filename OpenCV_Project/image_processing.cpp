@@ -91,18 +91,14 @@ void shapeDetect(Mat img, Mat img_dil) {
 	waitKey(0);
 }
 
-/****
-*	getContours;
-*	Function to findand draw detected contours on the original image
-*	Arguments: takes Matrix of dilated image and the original image
-*	Returns: void, no return
-****/
-void getContours(Mat img_dil, Mat img)
-{
+vector<vector<Point>> findContours(Mat img, Mat img_dil) {
 	//Set up according to documentation
 	vector<vector<Point>> contours;
 	vector<Vec4i> hierarchy;
 	findContours(img_dil, contours, hierarchy, RETR_EXTERNAL, CHAIN_APPROX_SIMPLE);
+
+	vector<vector<Point>> contours_filtered;
+
 	//Define area variable to filter out noise contours by specifying minimum area
 	double area = 0;
 	//Draw contours one by one while filtering out noise
@@ -112,12 +108,28 @@ void getContours(Mat img_dil, Mat img)
 		//Filter out any object with area <= 2500
 		if (area > 2500)
 		{
-			drawContours(img, contours, i, Scalar(155, 120, 255), 6);
+			contours_filtered.push_back(contours[i]);
 		}
 	}
 
+	return contours_filtered;
+}
+
+/****
+*	drawContours
+*	Function to draw detected contours on the original image
+*	Arguments: takes Matrix of image and the contours
+*	Returns: void, no return
+****/
+void drawContours(Mat img, vector<vector<Point>> contours)
+{
+	
+	for (int i = 0; i < contours.size(); i++)
+	{
+		drawContours(img, contours, i, Scalar(155, 120, 255), 6);	
+	}
+
 	//Show the result
-	imshow("Dilated image passed to the function", img_dil);
 	imshow("Contoured image", img);
 	waitKey(0);
 	return;
