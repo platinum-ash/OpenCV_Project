@@ -71,7 +71,7 @@ int main()
 			//Prepare image for contour detection
 			img_contour = preProcessor(img);
 			contours = findContours(img, img_contour);
-			drawContours(img, contours);
+			drawContoursLocal(img, contours);
 			break;
 		case 3:
 			//Prepare image for shape detection

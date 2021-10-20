@@ -91,6 +91,14 @@ void shapeDetect(Mat img, Mat img_dil) {
 	waitKey(0);
 }
 
+
+
+/****
+*	findContours
+*	Function finds all contours with a area based noise filter
+*	Arguments : original image of type Mat and the preprocessed image for finding contours
+*	Returns: vector of Point vectors
+****/
 vector<vector<Point>> findContours(Mat img, Mat img_dil) {
 	//Set up according to documentation
 	vector<vector<Point>> contours;
@@ -121,7 +129,7 @@ vector<vector<Point>> findContours(Mat img, Mat img_dil) {
 *	Arguments: takes Matrix of image and the contours
 *	Returns: void, no return
 ****/
-void drawContours(Mat img, vector<vector<Point>> contours)
+void drawContoursLocal(Mat img, vector<vector<Point>> contours)
 {
 	
 	for (int i = 0; i < contours.size(); i++)
