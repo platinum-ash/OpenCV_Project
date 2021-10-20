@@ -9,7 +9,7 @@
 
 
 using namespace cv;
-using namespace std;
+using std::vector;
 /****
 *	findHSV;
 *	Function to help identify HSV color parameters of an image
