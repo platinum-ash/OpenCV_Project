@@ -8,6 +8,6 @@ be updated.
 # Present functions for image processing:
 1: Finding HSV color code of a particular object in image for further processing. Using realtime trackbars.  
 2: Finding and drawing detected contours  
-  
+3: Detecting basic and obvious shapes (Circle, triangle, rectangle)  
 
 New functions and features can easily be added to the project.
