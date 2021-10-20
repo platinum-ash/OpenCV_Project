@@ -42,6 +42,7 @@ int main()
 	getline(cin, userInput);
 	//Read image using user provided path
 	img = imread(userInput);
+
 	//Print an error and exit if image cannot be read
 	if (img.empty())
 	{
@@ -50,9 +51,11 @@ int main()
 	}
 	//Check if image needs to be shrinked
 	checkSize(img);
+
 	//Present user the options to chose desired function
 	int userChoice = -1;
-	cout << "Please select the desired function : \n\t1: Find HSV colors of image\n\t2: Find and draw contours";
+	cout << "Please select the desired function : \n\t1: Find HSV colors of image\n\t2: Find and draw contours\n: ";
+	cin >> userChoice;
 
 	Mat img_contour;
 	switch (userChoice)
@@ -69,6 +72,7 @@ int main()
 			break;
 
 		default:
+			cout << "\nInvalid parameter. Program will now exit...";
 			break;
 	}
 	
