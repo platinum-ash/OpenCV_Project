@@ -22,7 +22,7 @@ using std::cin;
 *	Returns: void
 *****/
 //
-void checkSize(Mat &img) 
+inline void checkSize(Mat &img) 
 {
 	Size img_size = img.size();
 	int width = img_size.width;
