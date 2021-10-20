@@ -55,7 +55,8 @@ int main()
 
 	//Present user the options to chose desired function
 	int userChoice = -1;
-	cout << "Please select the desired function : \n\t1: Find HSV colors of image\n\t2: Find and draw contours\n: ";
+	cout << "Please select the desired function : \n\t1: Find HSV colors of image\n\t2: Find and draw contours"
+		 << "\n\t3: Detect shapes(only circle, triangle, rectangle) \nChoice: ";
 	cin >> userChoice;
 
 	Mat img_contour;
@@ -71,7 +72,14 @@ int main()
 			//Add contours and show the result
 			getContours(img_contour, img);
 			break;
-
+		case 3:
+			//Prepare image for shape detection
+			img_contour = preProcessor(img);
+			//detect shapes and show the result
+			shapeDetect(img, img_contour);
+			break;
+		case 4:
+			break;
 		default:
 			cout << "\nInvalid parameter. Program will now exit...";
 			break;

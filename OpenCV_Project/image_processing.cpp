@@ -48,6 +48,48 @@ void findHSV(Mat img) {
 	return;
 
 }
+/****
+*	shapeDetect;
+*	Function to detect and display very basic and obvious shapes : Triangle, Rectangular, Circle
+*	Arguments: takes Matrix of dilated image and the original image
+*	Returns: void, no return
+****/
+void shapeDetect(Mat img, Mat img_dil) {
+	//Set up according to documentation
+	vector<vector<Point>> contours;
+	vector<Vec4i> hierarchy;
+	findContours(img_dil, contours, hierarchy, RETR_EXTERNAL, CHAIN_APPROX_SIMPLE);
+	float perimeter;
+	int contour_size = contours.size();//get and store contour size
+	vector<vector<Point>> conPoly(contour_size);//create vector to store approxPolyDP results
+
+	vector<Rect> labelBound(contours.size());//Create vector to hold points for drawing boundary around shape
+
+	std::string shape;
+	int num_edges;
+	for (int i = 0; i < contour_size; i++)
+	{
+		//Use 20% perimeter as the approximate allowable distance b/w original curve and new points
+		perimeter = arcLength(contours[i], true);
+		approxPolyDP(contours[i], conPoly[i], 0.02f * perimeter, true);
+
+		//Get the bounding rectangle from the detected edges for drawing label boundary
+		labelBound[i] = boundingRect(conPoly[i]);
+
+		//Give shapes names according the number of detected edges
+		num_edges = conPoly[i].size();
+		if (num_edges == 3) shape = "Triangle";
+		if (num_edges == 4) shape = "Rectangular";
+		if (num_edges > 4)  shape = "Circle";
+
+		//Draw name of shapes along with highlighting boundary around the shape
+		rectangle(img, labelBound[i], Scalar(255, 0, 255));
+		putText(img, shape, { labelBound[i].x, labelBound[i].y - 8 }, FONT_HERSHEY_COMPLEX, 0.60f, 4);
+		drawContours(img, conPoly, i, Scalar(0, 0, 0), 1);
+	}
+	imshow("Shapes", img);
+	waitKey(0);
+}
 
 /****
 *	getContours;
@@ -93,9 +135,12 @@ Mat preProcessor(Mat img)
 {
 	Mat img_blur, img_canny, img_dilated, kernel, img_crop, img_mono;
 	cvtColor(img, img_mono, COLOR_BGR2GRAY);//Convert color to gray scale
-	GaussianBlur(img, img_blur, Size(7, 7), 5, 0);//Add blur
-	Canny(img_blur, img_canny, 25, 80);
+	GaussianBlur(img, img_blur, Size(3, 3), 5, 0);//Add blur
+	Canny(img_blur, img_canny, 50, 150);
 	kernel = getStructuringElement(MORPH_RECT, Size(3, 3));
 	dilate(img_canny, img_dilated, kernel);
 	return img_dilated;
 }
+
+
+
