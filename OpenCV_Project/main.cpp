@@ -30,7 +30,6 @@ int main()
 {
 	Mat img;
 	//For now use console input for the image file path.
-	//TODO : ACCEPTH IMAGE PATH AS COMMAND LINE INPUT WHEN THE PROGRAM STARTS
 	string userInput;
 	cout << "Please input path of the image: ";
 	getline(cin, userInput);
@@ -84,5 +83,5 @@ int main()
 	
 	
 
-	return 0;
+	return EXIT_FAILURE;
 }
