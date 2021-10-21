@@ -70,7 +70,7 @@ int main()
 		case 2:
 			//Prepare image for contour detection
 			img_contour = preProcessor(img);
-			contours = findContours(img, img_contour);
+			contours = findContours( img_contour);
 			drawContoursLocal(img, contours);
 			break;
 		case 3:
@@ -80,6 +80,9 @@ int main()
 			shapeDetect(img, img_contour);
 			break;
 		case 4:
+			//Prepare image for shape detection
+			img_contour = preProcessor(img);
+			scanDocument(img, img_contour);
 			break;
 		default:
 			cout << "\nInvalid parameter. Program will now exit...";

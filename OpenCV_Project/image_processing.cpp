@@ -11,6 +11,9 @@
 using namespace cv;
 using std::vector;
 
+//Define some Scalar colors
+#define BORDER_PINK	Scalar(155, 120, 255)
+
 /****
 *	findHSV;
 *	Function to help identify HSV color parameters of an image
@@ -75,7 +78,7 @@ Mat preProcessor(Mat img)
 *	Returns: vector of Point vectors
 ****/
 
-vector<vector<Point>> findContours(Mat img, Mat img_dil) {
+vector<vector<Point>> findContours(Mat img_dil) {
 	//Set up according to documentation
 	vector<vector<Point>> contours;
 	vector<Vec4i> hierarchy;
@@ -111,7 +114,7 @@ void drawContoursLocal(Mat img, vector<vector<Point>> contours, int color_choice
 	
 	for (int i = 0; i < contours.size(); i++)
 	{
-		drawContours(img, contours, i, Scalar(155, 120, 255), 6);	
+		drawContours(img, contours, i, BORDER_PINK, 6);	
 	}
 
 	//Show the result
@@ -130,7 +133,7 @@ void drawContoursLocal(Mat img, vector<vector<Point>> contours, int color_choice
 
 void shapeDetect(Mat img, Mat img_dil) {
 	//Get all contours
-	vector<vector<Point>> contours = findContours(img, img_dil);
+	vector<vector<Point>> contours = findContours(img_dil);
 
 	float perimeter;
 	std::string shape;
@@ -161,4 +164,46 @@ void shapeDetect(Mat img, Mat img_dil) {
 	}
 	imshow("Shapes", img);
 	waitKey(0);
+}
+
+vector<Point> findLargestRect(Mat img_dil) {
+	//Get all contours
+	vector<vector<Point>> contours = findContours(img_dil);
+
+	float perimeter;
+	int area, biggest = 0;
+	int contour_size = contours.size();//get and store contour size
+	vector<vector<Point>> conPoly(contour_size);//create vector to store approxPolyDP results
+	vector<Point> largestRect;
+
+	for (int i = 0; i < contour_size; i++) 
+	{
+
+		// Use 20 % perimeter as the approximate allowable distance b / w original curve and new points
+		perimeter = arcLength(contours[i], true);
+		area = contourArea(contours[i]);
+		approxPolyDP(contours[i], conPoly[i], 0.02f * perimeter, true);
+		//Find the largest rectangle
+		if(area > biggest && conPoly[i].size() == 4)
+		{
+			//Store the coordinates of the largest rectangle by area found so far
+			largestRect = {conPoly[i][0], conPoly[i][1] , conPoly[i][2] , conPoly[i][3]};
+			biggest = area;
+		}
+	}
+
+	return largestRect;
+}
+
+
+void scanDocument(Mat img, Mat img_dil) {
+
+	vector<Point> detectedEdges = findLargestRect(img_dil);
+	for (int i = 0; i < detectedEdges.size(); i++)
+	{
+		circle(img, detectedEdges[i], 4, BORDER_PINK);
+	}
+	imshow("Detected edges", img);
+	waitKey(2000);
+
 }
