@@ -109,7 +109,7 @@ vector<vector<Point>> findContours(Mat img_dil) {
 *	Returns: void, no return
 ****/
 
-void drawContoursLocal(Mat img, vector<vector<Point>> contours, int color_choice = 0)
+void drawContoursLocal(Mat img, vector<vector<Point>> contours)
 {
 	
 	for (int i = 0; i < contours.size(); i++)
@@ -201,7 +201,7 @@ void scanDocument(Mat img, Mat img_dil) {
 	vector<Point> detectedEdges = findLargestRect(img_dil);
 	for (int i = 0; i < detectedEdges.size(); i++)
 	{
-		circle(img, detectedEdges[i], 4, BORDER_PINK);
+		circle(img, detectedEdges[i], 6, BORDER_PINK, FILLED);
 	}
 	imshow("Detected edges", img);
 	waitKey(2000);
