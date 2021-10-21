@@ -20,7 +20,7 @@ using std::vector;
 *	Arguments: takes image with type cv::Mat
 *	Returns: No return
 ****/
-void findHSV(Mat img) {
+void findHSV(Mat &img) {
 	//Define bounds for HSV space, to be used with trackbars
 	int h_min = 0, s_min = 0, v_min = 0;
 	int h_max = 179, s_max = 255, v_max = 255;
@@ -60,7 +60,7 @@ void findHSV(Mat img) {
 *	Returns: dilated image of type Mat ready for contour detection
 ****/
 
-Mat preProcessor(Mat img)
+Mat preProcessor(Mat &img)
 {
 	Mat img_blur, img_canny, img_dilated, kernel, img_crop, img_mono;
 	cvtColor(img, img_mono, COLOR_BGR2GRAY);//Convert color to gray scale
@@ -78,7 +78,7 @@ Mat preProcessor(Mat img)
 *	Returns: vector of Point vectors
 ****/
 
-vector<vector<Point>> findContours(Mat img_dil) {
+vector<vector<Point>> findContoursLocal(Mat &img_dil) {
 	//Set up according to documentation
 	vector<vector<Point>> contours;
 	vector<Vec4i> hierarchy;
@@ -109,7 +109,7 @@ vector<vector<Point>> findContours(Mat img_dil) {
 *	Returns: void, no return
 ****/
 
-void drawContoursLocal(Mat img, vector<vector<Point>> contours)
+void drawContoursLocal(Mat &img, vector<vector<Point>> &contours)
 {
 	
 	for (int i = 0; i < contours.size(); i++)
@@ -131,9 +131,9 @@ void drawContoursLocal(Mat img, vector<vector<Point>> contours)
 *	Returns: void, no return
 ****/
 
-void shapeDetect(Mat img, Mat img_dil) {
+void shapeDetect(Mat &img, Mat &img_dil) {
 	//Get all contours
-	vector<vector<Point>> contours = findContours(img_dil);
+	vector<vector<Point>> contours = findContoursLocal(img_dil);
 
 	float perimeter;
 	std::string shape;
@@ -173,9 +173,9 @@ void shapeDetect(Mat img, Mat img_dil) {
 *	Returns: vector of point containing 4 edge coordinates
 ****/
 
-vector<Point> findLargestRect(Mat img_dil) {
+vector<Point> findLargestRect(Mat &img_dil) {
 	//Get all contours
-	vector<vector<Point>> contours = findContours(img_dil);
+	vector<vector<Point>> contours = findContoursLocal(img_dil);
 
 	float perimeter;
 	int area, biggest = 0;
@@ -221,7 +221,7 @@ Mat changePerspective(Mat &img, vector<Point> &coordinates) {
 
 }
 
-void scanDocument(Mat img, Mat img_dil) {
+void scanDocument(Mat &img, Mat &img_dil) {
 
 	vector<Point> detectedEdges = findLargestRect(img_dil);
 	/*for (int i = 0; i < detectedEdges.size(); i++)

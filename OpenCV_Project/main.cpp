@@ -63,7 +63,7 @@ int main()
 		case 2:
 			//Prepare image for contour detection
 			img_contour = preProcessor(img);
-			contours = findContours( img_contour);
+			contours = findContoursLocal( img_contour);
 			drawContoursLocal(img, contours);
 			break;
 		case 3:
