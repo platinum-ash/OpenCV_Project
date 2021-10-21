@@ -10,4 +10,5 @@ be updated.
 2: Finding and drawing detected contours  
 3: Detecting basic and obvious shapes (Circle, triangle, rectangle)  
 4: Scan Document ( Extracts a rectangular document from the image and changes perspective to present a scan )  
+
 New functions and features can easily be added to the project.
