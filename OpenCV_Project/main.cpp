@@ -49,7 +49,7 @@ int main()
 	//Present user the options to chose desired function
 	int userChoice = -1;
 	cout << "Please select the desired function : \n\t1: Find HSV colors of image\n\t2: Find and draw contours"
-		 << "\n\t3: Detect shapes(only circle, triangle, rectangle) \nChoice: ";
+		 << "\n\t3: Detect shapes(only circle, triangle, rectangle)\n\t4: Scan a document \nChoice: ";
 	cin >> userChoice;
 
 	Mat img_contour;
