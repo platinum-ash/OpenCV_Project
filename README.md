@@ -12,3 +12,6 @@ be updated.
 4: Scan Document ( Extracts a rectangular document from the image and changes perspective to present a scan )  
 
 New functions and features can easily be added to the project.
+
+# TODO
+Add feature to accept command line argument for path of the image
