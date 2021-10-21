@@ -203,14 +203,32 @@ vector<Point> findLargestRect(Mat img_dil) {
 }
 
 
+Mat changePerspective(Mat img, vector<Point> coordinates) {
+	float width, height;
+	width = 600.0f;
+	height = 700.0f;
+
+	Mat transformed, img_out;
+	Point2f transform_src[4] = { coordinates[0],coordinates[3], coordinates[1], coordinates[2] };
+	Point2f transform_dst[4] = { {0.0f, 0.0f}, {width, 0.0f}, {0.0f, height}, {width, height} };
+
+	transformed = getPerspectiveTransform(transform_src, transform_dst);
+	warpPerspective(img, img_out, transformed, Point(width, height));
+
+	return img_out;
+
+}
+
 void scanDocument(Mat img, Mat img_dil) {
 
 	vector<Point> detectedEdges = findLargestRect(img_dil);
-	for (int i = 0; i < detectedEdges.size(); i++)
+	/*for (int i = 0; i < detectedEdges.size(); i++)
 	{
 		circle(img, detectedEdges[i], 6, BORDER_PINK, FILLED);
-	}
-	imshow("Detected edges", img);
+	}*/
+	
+	imshow("Detected edges", changePerspective(img, detectedEdges));
 	waitKey(2000);
 
 }
+
