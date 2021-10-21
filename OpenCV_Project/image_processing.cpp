@@ -166,6 +166,13 @@ void shapeDetect(Mat img, Mat img_dil) {
 	waitKey(0);
 }
 
+/****
+*	findLargestRect;
+*	Function to find the edge coordinates of the largest rectangle in an image for doc scanning
+*	Arguments: takes Matrix of dilated image( preprocessed )
+*	Returns: vector of point containing 4 edge coordinates
+****/
+
 vector<Point> findLargestRect(Mat img_dil) {
 	//Get all contours
 	vector<vector<Point>> contours = findContours(img_dil);
