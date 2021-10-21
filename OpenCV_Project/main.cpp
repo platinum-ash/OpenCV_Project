@@ -73,7 +73,7 @@ int main()
 			shapeDetect(img, img_contour);
 			break;
 		case 4:
-			//Prepare image for shape detection
+			//Prepare image for scanning
 			img_contour = preProcessor(img);
 			scanDocument(img, img_contour);
 			break;
@@ -84,5 +84,5 @@ int main()
 	
 	
 
-	return EXIT_SUCCESS;
+	return 0;
 }
