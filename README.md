@@ -3,7 +3,7 @@ Just a fun project to test some of the very basic capabilities of OpenCV using C
 # Dependancies
 Needs OpenCV library to be installed on the system.  
 main.cpp file is to be run. image_processing cpp and header files should be kept in the same directory as the main.cpp file for easier compilation. Otherwise include paths should 
-be updated.
+be updated. Compilation should properly include OpenCV library. 
 
 # Present functions for image processing:
 1: Finding HSV color code of a particular object in image for further processing. Using realtime trackbars.  
