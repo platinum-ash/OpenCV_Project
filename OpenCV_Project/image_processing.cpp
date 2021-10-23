@@ -16,12 +16,13 @@ using std::vector;
 
 /****
 *	findHSV;
-*	Function to help identify HSV color parameters of an image
+*	Function to help identify HSV(Hue, Saturation and value) color parameters of an image
 *	Arguments: takes image with type cv::Mat
 *	Returns: No return
 ****/
 void findHSV(Mat &img) {
 	//Define bounds for HSV space, to be used with trackbars
+	//We will search image for pixels with range of these HSV values
 	int h_min = 0, s_min = 0, v_min = 0;
 	int h_max = 179, s_max = 255, v_max = 255;
 
@@ -35,17 +36,17 @@ void findHSV(Mat &img) {
 	createTrackbar("Value max", "Trackbar", &v_max, 255);
 
 	
-	Mat img_new_colors, mask;
+	Mat img_new_colors, result;
+	//Convert image to HSV color space
 	cvtColor(img, img_new_colors, COLOR_BGR2HSV);
-	//imshow("Image", img_new_colors);
 	while (true) {
 
 		Scalar lower_b(h_min, s_min, v_min);
 		Scalar upper_b(h_max, s_max, v_max);
 		imshow("Original", img);
-		
-		inRange(img_new_colors, lower_b, upper_b, mask);
-		imshow("Image", mask);
+		//Call inRange to find pixels with HSV color within given range
+		inRange(img_new_colors, lower_b, upper_b, result);
+		imshow("Image", result);
 		waitKey(1);
 
 	}
@@ -233,4 +234,3 @@ void scanDocument(Mat &img, Mat &img_dil) {
 	waitKey(20000);
 
 }
-
