@@ -145,7 +145,7 @@ void shapeDetect(Mat &img, Mat &img_dil) {
 
 	for (int i = 0; i < contour_size; i++)
 	{
-		//Use 20% perimeter as the approximate allowable distance b/w original curve and new points
+		//Use 2% perimeter as the approximate allowable distance b/w original curve and new points
 		perimeter = arcLength(contours[i], true);
 		approxPolyDP(contours[i], conPoly[i], 0.02f * perimeter, true);
 
