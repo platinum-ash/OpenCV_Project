@@ -82,8 +82,8 @@ Mat preProcessor(Mat &img)
 vector<vector<Point>> findContoursLocal(Mat &img_dil) {
 	//Set up according to documentation
 	vector<vector<Point>> contours;
-	vector<Vec4i> hierarchy;
-	findContours(img_dil, contours, hierarchy, RETR_EXTERNAL, CHAIN_APPROX_SIMPLE);
+
+	findContours(img_dil, contours, RETR_EXTERNAL, CHAIN_APPROX_SIMPLE);
 
 	vector<vector<Point>> contours_filtered;
 
